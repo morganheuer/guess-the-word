@@ -21,11 +21,15 @@ const getWord = async function() {
     const wordArray = words.split("\n");
     const randomIndex =  Math.floor(Math.random() * wordArray.length);
     word = wordArray[randomIndex].trim();
+    remainingGuesses = word.length + 3;
     placeholder(word);
+    console.log(remainingGuesses);
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
 };
 
 // Fire off the game
 getWord();
+
 
 // Display dot placeholders for the chosen word's letters - for every letter push ● to the placeholderLetters array
 const placeholder = function(word) {
@@ -136,6 +140,7 @@ const updateGuessesRemaining = function(guess) {
     // update the message to tell the player how many guesses they have left and if they lose
     if (remainingGuesses === 0) {
         message.innerText = `Game over! The word was <span class="highlight">${word}</span>.`;
+        startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
@@ -150,5 +155,31 @@ const checkIfWin = function() {
         // if so, add the win class to empty paragraph and a message to crogratulate them
         message.classList.add("win");
         message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+
+        startOver();
     }
 };
+
+// Hide and show elements when the game is over
+const startOver = function() {
+    guessButton.classList.add("hide");
+    remainingGuessesElement.classList.add("hide");
+    guessedLettersElement.classList.add("hide");
+    playAgainButton.classList.remove("hide");
+};
+
+
+playAgainButton.addEventListener("click", function() {
+    message.classList.remove("win");
+    message.innerText = "";
+    guessedLettersElement.innerHTML = "";
+    remainingGuesses = word.length += 3;
+    guessedLetters = [];
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessButton.classList.remove("hide");
+    remainingGuessesElement.classList.remove("hide");
+    guessedLettersElement.classList.remove("hide");
+    playAgainButton.classList.add("hide");
+
+    getWord();
+})
