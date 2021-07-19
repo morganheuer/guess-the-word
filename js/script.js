@@ -10,7 +10,7 @@ const playAgainButton = document.querySelector(".play-again");
 let word = "magnolia";
 
 // create a global variable with an empty array which will contain all the letters the player guesses
-const guessedLetters = [];
+let guessedLetters = [];
 
 let remainingGuesses = 8;
 
@@ -170,16 +170,18 @@ const startOver = function() {
 
 
 playAgainButton.addEventListener("click", function() {
+    getWord();
+
     message.classList.remove("win");
-    message.innerText = "";
-    guessedLettersElement.innerHTML = "";
-    remainingGuesses = word.length += 3;
     guessedLetters = [];
+    remainingGuesses = word.length += 3;
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessedLettersElement.innerHTML = "";
+    message.innerText = "";
+
+
     guessButton.classList.remove("hide");
     remainingGuessesElement.classList.remove("hide");
     guessedLettersElement.classList.remove("hide");
     playAgainButton.classList.add("hide");
-
-    getWord();
-})
+});
