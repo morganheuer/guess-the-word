@@ -139,7 +139,7 @@ const updateGuessesRemaining = function(guess) {
 
     // update the message to tell the player how many guesses they have left and if they lose
     if (remainingGuesses === 0) {
-        message.innerText = `Game over! The word was <span class="highlight">${word}</span>.`;
+        message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
         startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
