@@ -84,6 +84,7 @@ const makeGuess = function(guess) {
     // if they haven't guessed that letter before, add the letter to the guessedLetters array
     } else {
         guessedLetters.push(guess);
+        guessedLetters.sort();
         console.log(guessedLetters);
         updateGuessesRemaining(guess);
         showGuessedLetters();
@@ -100,6 +101,7 @@ const showGuessedLetters = function() {
         const li = document.createElement("li");
         li.innerText = letter;
         guessedLettersElement.append(li);
+        // guessedLetters.sort();
     }
 };
 
@@ -139,7 +141,7 @@ const updateGuessesRemaining = function(guess) {
 
     // update the message to tell the player how many guesses they have left and if they lose
     if (remainingGuesses === 0) {
-        message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
+        message.innerHTML = `Game over! The word was <span class="highlight">${word.toUpperCase()}</span>.`;
         startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
