@@ -22,7 +22,7 @@ const getWord = async function() {
     const wordArray = words.split("\n");
     const randomIndex =  Math.floor(Math.random() * wordArray.length);
     word = wordArray[randomIndex].trim();
-    remainingGuesses = word.length + 3;
+    remainingGuesses = word.length + 1;
     placeholder(word);
     console.log(remainingGuesses);
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
@@ -179,7 +179,7 @@ playAgainButton.addEventListener("click", function() {
 
     message.classList.remove("win");
     guessedLetters = [];
-    remainingGuesses = word.length += 3;
+    remainingGuesses = word.length += 1;
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     guessedLettersElement.innerHTML = "";
     message.innerText = "";
